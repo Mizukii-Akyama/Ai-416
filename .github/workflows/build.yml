@@ -22,7 +22,7 @@ jobs:
           # minSdk 26 для llama_flutter_android
           sed -i 's/minSdk = .*/minSdk = 26/' android/app/build.gradle.kts
 
-          # compileSdk 36 для всех плагинов (в начало корневого build.gradle.kts)
+          # compileSdk 36 для всех плагинов
           cat > /tmp/hook.kts <<'EOF'
           subprojects {
               afterEvaluate {
@@ -37,8 +37,8 @@ jobs:
           mv /tmp/new.kts android/build.gradle.kts
 
           grep -n "minSdk" android/app/build.gradle.kts
-          head -12 android/build.gradle.kts
 
+      - run: flutter pub add shared_preferences
       - run: flutter pub upgrade
       - run: flutter build apk --release
 
