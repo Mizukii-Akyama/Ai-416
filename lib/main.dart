@@ -186,8 +186,8 @@ class _ChatScreenState extends State<ChatScreen> {
       try {
         await _controller.loadModel(
           modelPath: result.files.single.path!,
-          contextSize: 2048,
-          threads: 4,
+          contextSize: 1024,
+          threads: 2,
         );
         setState(() {
           _modelLoaded = true;
