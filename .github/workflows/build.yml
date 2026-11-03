@@ -2,11 +2,11 @@ name: Build APK
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: '17'
@@ -17,12 +17,29 @@ jobs:
 
       - run: flutter create --platforms=android --project-name my_ai_app .
 
-      - name: Set minSdk 26
+      - name: Patch Android config
         run: |
+          # minSdk 26 для llama_flutter_android
           sed -i 's/minSdk = .*/minSdk = 26/' android/app/build.gradle.kts
-          grep -n "minSdk" android/app/build.gradle.kts
 
-      - run: flutter pub get
+          # compileSdk 36 для всех плагинов (в начало корневого build.gradle.kts)
+          cat > /tmp/hook.kts <<'EOF'
+          subprojects {
+              afterEvaluate {
+                  extensions.findByName("android")?.let {
+                      (it as com.android.build.gradle.BaseExtension).compileSdkVersion(36)
+                  }
+              }
+          }
+
+          EOF
+          cat /tmp/hook.kts android/build.gradle.kts > /tmp/new.kts
+          mv /tmp/new.kts android/build.gradle.kts
+
+          grep -n "minSdk" android/app/build.gradle.kts
+          head -12 android/build.gradle.kts
+
+      - run: flutter pub upgrade
       - run: flutter build apk --release
 
       - uses: actions/upload-artifact@v4
