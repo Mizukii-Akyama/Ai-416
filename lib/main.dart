@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Мой ИИ',
+      title: 'Ai is eblan XD''',
       theme: ThemeData.dark(),
       home: const ChatScreen(),
     );
@@ -40,9 +40,9 @@ class _ChatScreenState extends State<ChatScreen> {
           threads: 4,
         );
         setState(() => _modelLoaded = true);
-        _messages.add('Модель загружена! Можешь писать.');
+        _messages.add('Модель загружена.');
       } catch (e) {
-        _messages.add('Ошибка загрузки: $e');
+        _messages.ad'Error loading : $e');
       }
       setState(() => _isLoading = false);
     }
@@ -53,8 +53,8 @@ class _ChatScreenState extends State<ChatScreen> {
     final prompt = _textController.text;
     _textController.clear();
     setState(() {
-      _messages.add('Ты: $prompt');
-      _messages.add('ИИ: ');
+      _messages.ad('prompt't');
+      _messages.ad();
     });
 
     _controller.generate(prompt: prompt, maxTokens: 512).listen((token) {
@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Мой локальный ИИ')),
+      appBar: AppBar(title: const Text('Ai')),
       body: Column(
         children: [
           if (!_modelLoaded)
@@ -75,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _pickModel,
-                child: Text(_isLoading ? 'Загрузка...' : 'Выбрать .gguf файл'),
+                child: Text(_isLoading 'loading...' : 'Выбрать .gguf файл'),
               ),
             ),
           Expanded(
@@ -95,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _textController,
-                    decoration: const InputDecoration(hintText: 'Введи сообщение...'),
+                    decoration: const InputDecoration(hintText 'Enter the promt:'),
                     onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
