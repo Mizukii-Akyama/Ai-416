@@ -88,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  // ---------- хранение ----------
+  // ---------- storage ----------
 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -123,7 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: kDefaultTitle,
       );
 
-  // ---------- диалоги ----------
+  // ---------- dialogs ----------
 
   void _newConversation() {
     final conv = _createConversation();
@@ -154,10 +154,10 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('Cancel'),
+              child: const Text('Cancel')),
           TextButton(
               onPressed: () => Navigator.pop(ctx, ctrl.text),
-              child: const Text('Save'),
+              child: const Text('Save')),
         ],
       ),
     );
@@ -177,7 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _scrollToBottom();
   }
 
-  // ---------- модель и чат ----------
+  // ---------- model and chat ----------
 
   Future<void> _pickModel() async {
     final result = await FilePicker.platform.pickFiles();
@@ -250,7 +250,7 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  // ---------- интерфейс ----------
+  // ---------- UI ----------
 
   Widget _bubble(Message m) {
     final maxWidth = MediaQuery.of(context).size.width * 0.8;
