@@ -1,0 +1,16 @@
+name: my_ai_app
+description: My local AI app
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  llama_flutter_android: ^0.2.0
+  file_picker: ^8.0.0
+
+flutter:
+  uses-material-design: true
