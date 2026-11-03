@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Ai is eblan XD''',
+      title: 'Ai is eblan XD',
       theme: ThemeData.dark(),
       home: const ChatScreen(),
     );
@@ -53,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final prompt = _textController.text;
     _textController.clear();
     setState(() {
-      _messages.ad('prompt't');
+      _messages.ad('prompt''t');
       _messages.ad();
     });
 
