@@ -19,10 +19,8 @@ jobs:
 
       - name: Patch Android config
         run: |
-          # minSdk 26 для llama_flutter_android
           sed -i 's/minSdk = .*/minSdk = 26/' android/app/build.gradle.kts
 
-          # compileSdk 36 для всех плагинов
           cat > /tmp/hook.kts <<'EOF'
           subprojects {
               afterEvaluate {
@@ -40,7 +38,7 @@ jobs:
 
       - run: flutter pub add shared_preferences
       - run: flutter pub upgrade
-      - run: flutter build apk --release
+      - run: flutter build apk --release --no-shrink
 
       - uses: actions/upload-artifact@v4
         with:
